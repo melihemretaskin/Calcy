@@ -1,0 +1,170 @@
+#include <iostream>
+#include <Windows.h>
+#include <thread>
+#include <conio.h>
+#include <cstdlib>
+using namespace std;
+//enum COLORCODE {
+//    /*black = 0,
+//    blue = 1,
+//    green = 2,
+//    aqua = 3,
+//    red = 4,
+//    purple = 5,
+//    yellow = 6,
+//    white = 7,
+//    gray = 8,
+//    lightblue = 9,*/
+//    lgreen = 'A',
+//    laqua = 'B',
+//    lred = 'C',
+//    lpurple = 'D',
+//    lyellow = 'E',
+//    lbrightwhite = 'F',
+//
+//
+//};
+
+void colorFest(int x) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); 
+    if (x) {
+        SetConsoleTextAttribute(hConsole, x);
+    }
+    else
+        cout << "\n Error";
+}
+void randColor() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    srand(time(0));
+
+    for (int i = 0; i < 100; i++) {
+
+        int a = rand() % 10;
+        SetConsoleTextAttribute(hConsole, a);
+    }
+}
+void oneControl() {
+    randColor();
+    cout << "\n\n\n\r Press the following buttons for operations FOR: \n\r Multiplication is ' x ' \n\r  Addition is ' a ' \n\r Extraction is ' e ' \n\r Division is ' d ' ";
+}
+void welcome() {
+    char s = rand() % 10; 
+    for (int i = 0; i < 5; i++) {
+        colorFest(3);
+        cout << s << "     ";
+        while (i > 3) {         
+            for (int j = 0; j < 5; j++) {
+                colorFest(4);
+                cout << "\n\n" << s;
+                colorFest(6);
+                cout << "   Welcomo To Calcy !  ";
+                colorFest(5);
+                cout << s << "\n";
+            }
+            for (int z = 0; z < 1; z++) {
+                cout << "\n";
+            }
+            for (int k = 0; k < 5; k++) {
+                colorFest(2);
+                cout << s << "     ";
+                while (k > 3) {
+                    break;
+                }
+                colorFest(7);
+            }
+            break;
+        }  
+    }   
+    oneControl();
+}
+
+void randWrite() { 
+    srand(time (0));
+    for (int i = 0; i < 1; i++) {
+        if (rand() % 10 == 8 || rand() % 10 == 4 || rand() % 10 == 2 || rand() % 10 == 5) {
+            randColor();
+            cout << "\n\n\rThank ";
+            colorFest(2);
+            cout << "you ";
+            colorFest(3);
+            cout << "for ";
+            colorFest(4);
+            cout << "choosing ";
+            colorFest(7);
+            cout <<"us ";
+            colorFest(8);
+        }       
+    }      
+}
+void calculator() {
+    colorFest(3);
+    float number1,number2,total;
+    char select[3] = "x";
+    int x = 0;
+    colorFest(11);
+    cout << "\n\n\n\r Enter a number: ";
+    cin >> number1;
+    colorFest(12);
+    cout << "\n\r Enter second number: ";
+    cin >> number2;   
+    colorFest(14);
+    cout << "\n\n\r Your Selection: ";
+    select[1] = _getch();
+    switch (select[1]) {       
+    case 'x':
+        colorFest(2);
+        total = number1 * number2;
+        cout << "\n\n\n\rMultiplication is in progress...\n";
+        Sleep(500);
+        cout << number1 << " x " << number2 << " = " << total << "\n";
+        break;
+    case 'a':
+        colorFest(2);
+        total = number1 + number2;
+        cout << "\n\n\n\rAddition is in progress...\n";
+        Sleep(500);
+        cout << number1 << " + " << number2 << " = " << total << "\n";
+        break;
+    case 'e':
+        colorFest(2);
+        total = number1 - number2;
+        cout << "\n\n\n\rExtraction is in progress...\n";
+        Sleep(500);
+        cout << number1 << " - " << number2 << " = " << total << "\n";
+        break;
+    case 'd':
+        colorFest(2);
+        total = number1 / number2;
+        cout << "\n\n\n\rDivision is in progress...\n";
+        Sleep(500);
+        cout << number1 << " / " << number2 << " = " << total << "\n";
+        break;
+    default:
+        colorFest(4);
+        cout << "\n\n\n\r FOR SELECTION: \n\r Multiplication is ' x ' \n\r  Addition is ' a ' \n\r Extraction is ' e ' \n\r Division is ' d ' ";
+        break;
+        return calculator();
+    }   
+    while (true) {
+        Sleep(1000);
+        randWrite();
+        char r = rand() % 10 - 1;
+        randColor();
+        cout << " " << r;
+        break;
+    }
+    return calculator();
+}
+void th() { 
+    /*thread welcometh(welcome);*/
+    thread calculatorth(calculator); 
+    /*welcometh.join(); */
+    calculatorth.join();
+}
+int main()
+{
+    welcome(); 
+    Sleep(1000);
+    th(); 
+}
